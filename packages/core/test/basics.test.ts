@@ -46,6 +46,19 @@ describe('URLs', () => {
     expect(redactSecrets('error at postgresql://user:s3cr3t@db:5432/x')).toBe(
       'error at postgresql://user:***@db:5432/x',
     );
+    expect(redactSecrets('a postgres://u:p@h/a and POSTGRESQL://v:q:r@h/b')).toBe(
+      'a postgres://u:***@h/a and POSTGRESQL://v:***@h/b',
+    );
+    expect(redactSecrets('no password postgres://user@h/x, no auth postgres://h:5432/x')).toBe(
+      'no password postgres://user@h/x, no auth postgres://h:5432/x',
+    );
+  });
+
+  it('stays linear on hostile input (no ReDoS)', () => {
+    const hostile = `${'postgres://a:'.repeat(20_000)}x`;
+    const started = performance.now();
+    expect(redactSecrets(hostile)).toBe(hostile);
+    expect(performance.now() - started).toBeLessThan(500);
   });
 });
 
