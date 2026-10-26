@@ -1,6 +1,6 @@
 {
   "name": "@massimiliano-dev/nestjs-prisma-tenants-prisma",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Prisma 7 adapter and migrator for nestjs-prisma-tenants.",
   "license": "MIT",
   "author": "Massimiliano Polce",

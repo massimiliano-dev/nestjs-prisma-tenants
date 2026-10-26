@@ -1,6 +1,6 @@
 {
   "name": "@massimiliano-dev/nestjs-prisma-tenants-cli",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "CLI to list, create, archive and migrate tenant databases (tenants migrate --all --concurrency 5 --dry-run).",
   "license": "MIT",
   "author": "Massimiliano Polce",
