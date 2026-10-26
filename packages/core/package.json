@@ -1,6 +1,6 @@
 {
   "name": "@massimiliano-dev/nestjs-prisma-tenants-core",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Framework-agnostic core for database-per-tenant apps: tenant registry, client cache, resolution, migrations.",
   "license": "MIT",
   "author": "Massimiliano Polce",

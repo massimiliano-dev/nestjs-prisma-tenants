@@ -1,6 +1,6 @@
 {
   "name": "@massimiliano-dev/nestjs-prisma-tenants",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "NestJS module for database-per-tenant apps with Prisma and PostgreSQL. No request-scoped providers.",
   "license": "MIT",
   "author": "Massimiliano Polce",
