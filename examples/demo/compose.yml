@@ -1,0 +1,39 @@
+# Local demo: three tenants on subdomains.  curl http://acme.localhost:3000/notes
+# Credentials below are throwaway demo values. Never reuse them, and never commit real ones.
+services:
+  postgres:
+    image: postgres:17-alpine
+    command: ['postgres', '-c', 'max_connections=100']
+    environment:
+      POSTGRES_USER: app
+      POSTGRES_PASSWORD: demo-only-password
+      POSTGRES_DB: control
+    # Bound to loopback only: the database is not reachable from your network.
+    ports: ['127.0.0.1:5433:5432']
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U app -d control']
+      interval: 2s
+      retries: 30
+
+  app:
+    build:
+      context: ../..
+      dockerfile: examples/demo/Dockerfile
+    depends_on:
+      postgres:
+        condition: service_healthy
+    ports: ['127.0.0.1:3000:3000']
+    read_only: true
+    tmpfs: ['/tmp']
+    security_opt: ['no-new-privileges:true']
+    environment:
+      CONTROL_DATABASE_URL: postgresql://app:demo-only-password@postgres:5432/control
+      ADMIN_DATABASE_URL: postgresql://app:demo-only-password@postgres:5432/postgres
+      # Each tenant connects with its own role, created by the provisioner with these passwords.
+      # The registry stores only the references (env:TENANT_<SLUG>_DATABASE_URL), never the URLs.
+      TENANT_ACME_DATABASE_URL: postgresql://tenant_acme:acme-demo-password@postgres:5432/tenant_acme
+      TENANT_GLOBEX_DATABASE_URL: postgresql://tenant_globex:globex-demo-password@postgres:5432/tenant_globex
+      TENANT_INITECH_DATABASE_URL: postgresql://tenant_initech:initech-demo-password@postgres:5432/tenant_initech
+      BASE_DOMAIN: localhost
+      # Enables /health/details. Generate your own: openssl rand -hex 32
+      ADMIN_TOKEN: ${ADMIN_TOKEN:-}

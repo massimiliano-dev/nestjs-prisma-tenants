@@ -1,0 +1,18 @@
+// Schema of every tenant database. The control database is managed by the toolkit.
+generator client {
+  provider               = "prisma-client"
+  output                 = "../src/generated/prisma"
+  moduleFormat           = "esm"
+  importFileExtension    = "js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model Note {
+  id        Int      @id @default(autoincrement())
+  title     String
+  pinned    Boolean  @default(false)
+  createdAt DateTime @default(now())
+}

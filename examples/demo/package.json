@@ -1,0 +1,25 @@
+{
+  "name": "demo",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "generate": "PRISMA_HIDE_UPDATE_MESSAGE=1 DATABASE_URL=${DATABASE_URL:-postgresql://localhost:5432/unused} prisma generate",
+    "build": "pnpm generate && tsc -p tsconfig.json",
+    "start": "node dist/main.js",
+    "tenants": "tenants"
+  },
+  "dependencies": {
+    "@massimiliano-dev/nestjs-prisma-tenants": "workspace:^",
+    "@massimiliano-dev/nestjs-prisma-tenants-cli": "workspace:^",
+    "@massimiliano-dev/nestjs-prisma-tenants-prisma": "workspace:^",
+    "@nestjs/common": "^12.2.0",
+    "@nestjs/core": "^12.2.0",
+    "@nestjs/platform-express": "^12.2.0",
+    "@prisma/adapter-pg": "~7.10.1",
+    "@prisma/client": "~7.10.1",
+    "prisma": "~7.10.1",
+    "reflect-metadata": "^0.2.2",
+    "rxjs": "^7.8.2",
+    "pg": "^8.23.1"
+  }
+}

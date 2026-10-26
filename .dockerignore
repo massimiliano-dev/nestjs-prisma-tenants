@@ -1,0 +1,15 @@
+# Keep the build context small and free of secrets.
+**/node_modules
+**/dist
+**/src/generated
+**/test/fixture/generated
+.git
+**/.env
+**/.env.*
+!**/.env.example
+**/*.pem
+**/*.key
+**/*.p12
+**/*.pfx
+**/*.crt
+**/dumps

@@ -1,0 +1,41 @@
+{
+  "name": "nestjs-prisma-tenants-monorepo",
+  "private": true,
+  "type": "module",
+  "packageManager": "pnpm@9.15.0",
+  "engines": {
+    "node": ">=22.18"
+  },
+  "scripts": {
+    "build": "pnpm -r --filter './packages/*' build",
+    "typecheck": "tsc -p tsconfig.json",
+    "lint": "eslint .",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "test": "vitest run --project unit",
+    "test:int": "pnpm --filter @massimiliano-dev/nestjs-prisma-tenants-prisma generate:fixture && vitest run --project integration",
+    "test:all": "vitest run",
+    "changeset": "changeset",
+    "release": "pnpm build && changeset publish"
+  },
+  "devDependencies": {
+    "@changesets/cli": "^3.0.3",
+    "@eslint/js": "^10.0.1",
+    "@types/node": "^24.0.0",
+    "eslint": "^10.13.0",
+    "globals": "^17.13.0",
+    "prettier": "^3.9.10",
+    "typescript": "~6.0.3",
+    "typescript-eslint": "^8.72.0",
+    "vitest": "^5.0.5",
+    "@testcontainers/postgresql": "^12.2.1",
+    "testcontainers": "^12.2.1",
+    "pg": "^8.23.1",
+    "@types/pg": "^8.23.1"
+  },
+  "pnpm": {
+    "overrides": {
+      "multer@<2.5.0": "^2.5.0"
+    }
+  }
+}

@@ -1,0 +1,56 @@
+{
+  "name": "@massimiliano-dev/nestjs-prisma-tenants-core",
+  "version": "0.1.0",
+  "description": "Framework-agnostic core for database-per-tenant apps: tenant registry, client cache, resolution, migrations.",
+  "license": "MIT",
+  "author": "Massimiliano Polce",
+  "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/massimiliano-dev/nestjs-prisma-tenants.git",
+    "directory": "packages/core"
+  },
+  "homepage": "https://github.com/massimiliano-dev/nestjs-prisma-tenants#readme",
+  "bugs": "https://github.com/massimiliano-dev/nestjs-prisma-tenants/issues",
+  "keywords": [
+    "nestjs",
+    "prisma",
+    "multi-tenant",
+    "multitenancy",
+    "database-per-tenant",
+    "postgresql",
+    "saas"
+  ],
+  "engines": {
+    "node": ">=22.18"
+  },
+  "exports": {
+    ".": {
+      "@massimiliano-dev/source": "./src/index.ts",
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist",
+    "src"
+  ],
+  "sideEffects": false,
+  "scripts": {
+    "build": "rm -rf dist && tsc -p tsconfig.build.json",
+    "prepublishOnly": "pnpm build"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "dependencies": {
+    "lru-cache": "^11.5.3",
+    "pg": "^8.23.1"
+  },
+  "devDependencies": {
+    "@types/pg": "^8.23.1"
+  }
+}
