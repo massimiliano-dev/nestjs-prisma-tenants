@@ -48,7 +48,7 @@
   },
   "dependencies": {
     "@massimiliano-dev/nestjs-prisma-tenants-core": "workspace:^",
-    "commander": "^15.0.0",
+    "commander": "^15.1.0",
     "execa": "^10.2.1"
   },
   "bin": {
